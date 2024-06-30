@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CommerceWidget extends StatefulWidget {
-  static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
   final double dialogWidth;
   const CommerceWidget({super.key, required this.dialogWidth});
 
@@ -14,7 +14,7 @@ class _CommerceWidgetState extends State<CommerceWidget> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: CommerceWidget.formKey,
+      key: CommerceWidget.formKey1,
       child: Column(
         children: [
           Text(
@@ -41,8 +41,8 @@ class _CommerceWidgetState extends State<CommerceWidget> {
                 }
               },
               onChanged: (value) {
-                if (CommerceWidget.formKey.currentState != null) {
-                  CommerceWidget.formKey.currentState!.validate();
+                if (CommerceWidget.formKey1.currentState != null) {
+                  CommerceWidget.formKey1.currentState!.validate();
                   return null;
                 }
               },

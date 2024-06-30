@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 
-class CongressWidget extends StatefulWidget {
-  static final GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
+class NotaryWidget extends StatefulWidget {
+  static final GlobalKey<FormState> formKey6 = GlobalKey<FormState>();
   final double dialogWidth;
-  const CongressWidget({super.key, required this.dialogWidth});
+  const NotaryWidget({super.key, required this.dialogWidth});
 
   @override
-  State<CongressWidget> createState() => _CommerceWidgetState();
+  State<NotaryWidget> createState() => _NotaryWidgetState();
 }
 
-class _CommerceWidgetState extends State<CongressWidget> {
-  TextEditingController comtext = TextEditingController();
+class _NotaryWidgetState extends State<NotaryWidget> {
+  TextEditingController nottext = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: CongressWidget.formKey2,
+      key: NotaryWidget.formKey6,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Congress/Simultaneous (Minimum fengress)',
+            'Notary (Minimum fee: 77))',
             style: TextStyle(fontSize: 16),
           ),
           Container(
@@ -30,7 +30,7 @@ class _CommerceWidgetState extends State<CongressWidget> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                controller: comtext,
+                controller: nottext,
                 decoration: InputDecoration(
                     errorStyle: TextStyle(
                         height: 0), // Reduce the error text height to 0
@@ -51,8 +51,8 @@ class _CommerceWidgetState extends State<CongressWidget> {
                   }
                 },
                 onChanged: (value) {
-                  if (CongressWidget.formKey2.currentState != null) {
-                    CongressWidget.formKey2.currentState!.validate();
+                  if (NotaryWidget.formKey6.currentState != null) {
+                    NotaryWidget.formKey6.currentState!.validate();
                     return null;
                   }
                 },

@@ -15,6 +15,7 @@ class LanguageDropdown extends StatefulWidget {
 }
 
 class _LanguageDropdownState extends State<LanguageDropdown> {
+  SubCategory sc = SubCategory();
   List<LanguageModel> _languagePair = [];
   String _langOne = '';
   String _langTwo = '';
@@ -50,13 +51,14 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
       hintText: 'Select language pair',
       items: _languagePair,
       excludeSelected: false,
-      onChanged: (value) {
+      onChanged: (value) async {
         //print(value.toString());
         setState(() {
           selectedLangPair = value.toString();
-          _fetchLanguageCodes();
-          SubCategory().getSubCategoryDetails(_langOne, _langTwo);
         });
+        await _fetchLanguageCodes();
+        await sc.getSubCategoryDetails(_langOne, _langTwo);
+
         //Future.delayed(Duration(seconds: 3));
         setState(() {});
         log('changing value to: $value');
@@ -67,3 +69,7 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
     );
   }
 }
+
+
+
+//need to add a list and access it outside in add dialog class to build future builder.
