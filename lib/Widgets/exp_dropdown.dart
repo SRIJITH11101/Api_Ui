@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:task_03/Networking/expList.dart';
 
 class ExpDropDown extends StatefulWidget {
-  const ExpDropDown({super.key});
+  final Function(String) onExpChange;
+  const ExpDropDown({super.key, required this.onExpChange});
 
   @override
   State<ExpDropDown> createState() => _ExpDropDownState();
@@ -13,6 +14,7 @@ class ExpDropDown extends StatefulWidget {
 
 class _ExpDropDownState extends State<ExpDropDown> {
   List<String> _expList = [];
+  String exp = '';
 
   Future<void> getExpList() async {
     ExpList exl = ExpList();
@@ -20,6 +22,10 @@ class _ExpDropDownState extends State<ExpDropDown> {
     setState(() {
       _expList = exl.expList;
     });
+  }
+
+  void passExp() {
+    widget.onExpChange(exp);
   }
 
   @override
@@ -36,7 +42,9 @@ class _ExpDropDownState extends State<ExpDropDown> {
       items: _expList,
       //initialItem: _expList[0],
       onChanged: (value) {
+        exp = value!;
         log('changing value to: $value');
+        passExp();
       },
     );
   }

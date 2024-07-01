@@ -8,7 +8,13 @@ import 'package:task_03/Networking/lang_pair.dart';
 import 'package:task_03/Networking/sub_category.dart';
 
 class LanguageDropdown extends StatefulWidget {
-  const LanguageDropdown({super.key});
+  final Function(List<int>) onCommisionLimitChanged;
+  final Function(String) onLangPairNameChanged;
+  static List<int> commisionLimit = [];
+  const LanguageDropdown(
+      {super.key,
+      required this.onCommisionLimitChanged,
+      required this.onLangPairNameChanged});
 
   @override
   State<LanguageDropdown> createState() => _LanguageDropdownState();
@@ -16,6 +22,7 @@ class LanguageDropdown extends StatefulWidget {
 
 class _LanguageDropdownState extends State<LanguageDropdown> {
   SubCategory sc = SubCategory();
+  List<int> commisionLimit = [];
   List<LanguageModel> _languagePair = [];
   String _langOne = '';
   String _langTwo = '';
@@ -43,6 +50,15 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
       _langOne = langPair.langOne;
       _langTwo = langPair.langTwo;
     });
+    //print(selectedLangPair);
+    widget.onLangPairNameChanged(selectedLangPair);
+  }
+
+  Future<void> getSubCategoryDetails() async {
+    setState(() {});
+    await sc.getSubCategoryDetails(_langOne, _langTwo);
+    print(sc.commisionLimit.cast<int>());
+    widget.onCommisionLimitChanged(sc.commisionLimit.cast<int>());
   }
 
   @override
@@ -57,10 +73,12 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
           selectedLangPair = value.toString();
         });
         await _fetchLanguageCodes();
-        await sc.getSubCategoryDetails(_langOne, _langTwo);
+        await getSubCategoryDetails();
 
         //Future.delayed(Duration(seconds: 3));
-        setState(() {});
+        setState(() {
+          commisionLimit = sc.commisionLimit.cast<int>();
+        });
         log('changing value to: $value');
         //SubCategory().getSubCategoryDetails(_langOne, _langTwo);
         print('$_langOne and $_langTwo');

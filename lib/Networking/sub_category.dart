@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class SubCategory {
-  List commisionLimit = [];
-  Future<void> getSubCategoryDetails(String langOne, String langTwo) async {
+  List<dynamic> commisionLimit = [];
+  Future<List<dynamic>> getSubCategoryDetails(
+      String langOne, String langTwo) async {
     var uri =
         'https://api.babelonia.nl/site/home/sub-category-list?langone=$langOne&langtwo=$langTwo&tasker=true';
     var url = Uri.parse(uri);
@@ -14,6 +15,7 @@ class SubCategory {
         var subCatData = jsonDecode(response.body);
         List<dynamic> subCatDetails = subCatData['response'];
         print(subCatDetails);
+        commisionLimit.clear();
 
         for (var i = 0; i < subCatDetails.length; i++) {
           commisionLimit.add(subCatData['response'][i]['commision']);
@@ -27,6 +29,7 @@ class SubCategory {
         //   languagePair.add(LanguageModel(detail['name']));
         // }
         // print(languagePair);
+        //return commisionLimit;
       } else {
         print(response.statusCode);
         print(response.body);
@@ -34,5 +37,6 @@ class SubCategory {
     } catch (e) {
       print('Error: $e');
     }
+    return commisionLimit;
   }
 }

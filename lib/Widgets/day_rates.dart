@@ -2,11 +2,15 @@
 import 'package:flutter/material.dart';
 
 class DayRatesWidget extends StatefulWidget {
+  final TextEditingController rate1;
+  final TextEditingController rate2;
   static final GlobalKey<FormState> formKey3 = GlobalKey<FormState>();
   final double dialogWidth;
   const DayRatesWidget({
     Key? key,
     required this.dialogWidth,
+    required this.rate1,
+    required this.rate2,
   }) : super(key: key);
 
   @override
@@ -14,8 +18,6 @@ class DayRatesWidget extends StatefulWidget {
 }
 
 class _DayRatesWidgetState extends State<DayRatesWidget> {
-  TextEditingController rate1 = TextEditingController();
-  TextEditingController rate2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -38,7 +40,7 @@ class _DayRatesWidgetState extends State<DayRatesWidget> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    controller: rate1,
+                    controller: widget.rate1,
                     decoration: InputDecoration(
                         errorStyle: TextStyle(
                             height: 0), // Reduce the error text height to 0
@@ -82,7 +84,7 @@ class _DayRatesWidgetState extends State<DayRatesWidget> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    controller: rate2,
+                    controller: widget.rate2,
                     decoration: InputDecoration(
                         errorStyle: TextStyle(
                             height: 0), // Reduce the error text height to 0

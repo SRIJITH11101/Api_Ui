@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:task_03/Models/input_details.dart';
 import 'package:task_03/Networking/lang_pair.dart';
 import 'package:task_03/Widgets/add_dialog.dart';
+import 'package:task_03/submission.dart';
 
 class FetchScreen extends StatefulWidget {
   const FetchScreen({super.key});
@@ -10,6 +12,17 @@ class FetchScreen extends StatefulWidget {
 }
 
 class _FetchScreenState extends State<FetchScreen> {
+  List<String> langNamesList = [];
+  List<String> expList = [];
+  List<String> comtextList = [];
+  List<String> congtextList = [];
+  List<String> hdaytextList = [];
+  List<String> wdaytextList = [];
+  List<String> doctextList = [];
+  List<String> lawtextList = [];
+  List<String> nottextList = [];
+  List<String> privtextList = [];
+
   @override
   void initState() {
     // TODO: implement initState
@@ -20,6 +33,9 @@ class _FetchScreenState extends State<FetchScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Interpreting Fees'),
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             showModalBottomSheet(
@@ -28,6 +44,31 @@ class _FetchScreenState extends State<FetchScreen> {
                 builder: (context) {
                   return AddDialogWidget(
                     context: context,
+                    onSubmittingName: (langPairName,
+                        exp,
+                        comtext,
+                        congtext,
+                        hdaytext,
+                        wdaytext,
+                        doctext,
+                        lawtext,
+                        nottext,
+                        privtext) {
+                      setState(() {
+                        langNamesList.add(langPairName);
+                        expList.add(exp);
+                        comtextList.add(comtext);
+                        congtextList.add(congtext);
+                        hdaytextList.add(hdaytext);
+                        wdaytextList.add(wdaytext);
+                        doctextList.add(doctext);
+                        lawtextList.add(lawtext);
+                        nottextList.add(nottext);
+                        privtextList.add(privtext);
+                      });
+                      print(langNamesList);
+                      //langNamesList.add(p0);
+                    },
                   );
                 });
           },
@@ -37,11 +78,55 @@ class _FetchScreenState extends State<FetchScreen> {
           ),
         ),
         body: Center(
-          child: Text(
-            'Main display screen',
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
+            child: langNamesList.isEmpty
+                ? Text(
+                    'Main display screen',
+                    style: TextStyle(fontSize: 20),
+                  )
+                : ListView.builder(
+                    itemCount: langNamesList.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        trailing: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                langNamesList.removeAt(index);
+                                expList.removeAt(index);
+                                comtextList.removeAt(index);
+                                congtextList.removeAt(index);
+                                hdaytextList.removeAt(index);
+                                wdaytextList.removeAt(index);
+                                doctextList.removeAt(index);
+                                lawtextList.removeAt(index);
+                                nottextList.removeAt(index);
+                                privtextList.removeAt(index);
+                              });
+                            },
+                            icon: Icon(Icons.delete)),
+                        title: TextButton(
+                          child: Text(
+                            langNamesList[index],
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          onPressed: () {
+                            InputDetails(
+                              language: langNamesList[index],
+                              exp: expList[index],
+                              commerce: comtextList[index],
+                              congress: congtextList[index],
+                              hdr: hdaytextList[index],
+                              fdr: wdaytextList[index],
+                              doctor: doctextList[index],
+                              lawyer: lawtextList[index],
+                              notary: nottextList[index],
+                              private: privtextList[index],
+                            );
+                            print(privtextList[index]);
+                          },
+                        ),
+                      );
+                    },
+                  )),
       ),
     );
   }

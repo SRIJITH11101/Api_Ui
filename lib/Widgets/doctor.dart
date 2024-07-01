@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 
 class DoctorWidget extends StatefulWidget {
   static final GlobalKey<FormState> formKey4 = GlobalKey<FormState>();
+  final TextEditingController doctext;
   final double dialogWidth;
-  const DoctorWidget({super.key, required this.dialogWidth});
+  final int limitVal;
+  const DoctorWidget(
+      {super.key,
+      required this.dialogWidth,
+      required this.limitVal,
+      required this.doctext});
 
   @override
   State<DoctorWidget> createState() => _DoctorWidgetState();
 }
 
 class _DoctorWidgetState extends State<DoctorWidget> {
-  TextEditingController doctext = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -19,7 +24,7 @@ class _DoctorWidgetState extends State<DoctorWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Doctor / Care (Minimum fee: 77))',
+            'Doctor / Care (Minimum fee: ${widget.limitVal})',
             style: TextStyle(fontSize: 16),
           ),
           Container(
@@ -30,7 +35,7 @@ class _DoctorWidgetState extends State<DoctorWidget> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                controller: doctext,
+                controller: widget.doctext,
                 decoration: InputDecoration(
                     errorStyle: TextStyle(
                         height: 0), // Reduce the error text height to 0
@@ -44,8 +49,8 @@ class _DoctorWidgetState extends State<DoctorWidget> {
                   } else if (value == null ||
                       double.tryParse(value.trim()) == null) {
                     return 'Please enter a valid value';
-                  } else if (double.parse(value) < 60.0) {
-                    return 'Please enter a value greater than 60';
+                  } else if (double.parse(value) < widget.limitVal) {
+                    return 'Please enter a value greater than ${widget.limitVal}';
                   } else {
                     return null;
                   }

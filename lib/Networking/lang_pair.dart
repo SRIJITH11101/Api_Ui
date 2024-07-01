@@ -7,7 +7,7 @@ class LangPair {
   List<LanguageModel> languagePair = [];
   String langOne = '';
   String langTwo = '';
-
+  String langPairName = '';
   Future<void> getLangPair() async {
     var uri =
         'https://api.babelonia.nl/site/category/getmaincatlist?type=tasker';
@@ -30,6 +30,7 @@ class LangPair {
   }
 
   Future<void> getLangCodeWithName(String langPairName) async {
+    this.langPairName = langPairName;
     var uri =
         'https://api.babelonia.nl/site/category/getmaincatlist?type=tasker';
     var url = Uri.parse(uri);

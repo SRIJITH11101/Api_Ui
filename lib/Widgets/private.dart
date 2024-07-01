@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
 class PrivateWidget extends StatefulWidget {
+  final TextEditingController pritext;
   static final GlobalKey<FormState> formKey7 = GlobalKey<FormState>();
   final double dialogWidth;
-  const PrivateWidget({super.key, required this.dialogWidth});
+  final int limitVal;
+  const PrivateWidget(
+      {super.key,
+      required this.dialogWidth,
+      required this.limitVal,
+      required this.pritext});
 
   @override
   State<PrivateWidget> createState() => _PrivateWidgetState();
@@ -12,14 +18,13 @@ class PrivateWidget extends StatefulWidget {
 class _PrivateWidgetState extends State<PrivateWidget> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController pritext = TextEditingController();
     return Form(
       key: PrivateWidget.formKey7,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Notary (Minimum fee: 77))',
+            'Private (Minimum fee: ${widget.limitVal}))',
             style: TextStyle(fontSize: 16),
           ),
           Container(
@@ -30,7 +35,7 @@ class _PrivateWidgetState extends State<PrivateWidget> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                controller: pritext,
+                controller: widget.pritext,
                 decoration: InputDecoration(
                     errorStyle: TextStyle(
                         height: 0), // Reduce the error text height to 0
@@ -44,8 +49,8 @@ class _PrivateWidgetState extends State<PrivateWidget> {
                   } else if (value == null ||
                       double.tryParse(value.trim()) == null) {
                     return 'Please enter a valid value';
-                  } else if (double.parse(value) < 60.0) {
-                    return 'Please enter a value greater than 60';
+                  } else if (double.parse(value) < widget.limitVal) {
+                    return 'Please enter a value greater than ${widget.limitVal}';
                   } else {
                     return null;
                   }

@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 
 class CommerceWidget extends StatefulWidget {
   static final GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
+  final TextEditingController comtext;
   final double dialogWidth;
-  const CommerceWidget({super.key, required this.dialogWidth});
+  final int limitVal;
+  CommerceWidget(
+      {super.key,
+      required this.dialogWidth,
+      required this.limitVal,
+      required this.comtext});
 
   @override
   State<CommerceWidget> createState() => _CommerceWidgetState();
 }
 
 class _CommerceWidgetState extends State<CommerceWidget> {
-  TextEditingController comtext = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -18,14 +23,14 @@ class _CommerceWidgetState extends State<CommerceWidget> {
       child: Column(
         children: [
           Text(
-            'Commerce/Trade (Minimum fee : 50)',
+            'Commerce/Trade (Minimum fee : ${widget.limitVal})',
             style: TextStyle(fontSize: 16),
           ),
           Container(
             width: widget.dialogWidth * 0.7,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
             child: TextFormField(
-              controller: comtext,
+              controller: widget.comtext,
               decoration: InputDecoration(
                   prefixIcon: null, hintText: "Enter the value"),
               validator: (value) {
@@ -34,8 +39,8 @@ class _CommerceWidgetState extends State<CommerceWidget> {
                 } else if (value == null ||
                     double.tryParse(value.trim()) == null) {
                   return 'Please enter a valid value';
-                } else if (double.parse(value) < 50.0) {
-                  return 'Please enter a value greater than 50';
+                } else if (double.parse(value) < widget.limitVal) {
+                  return 'Please enter a value greater than  ${widget.limitVal}';
                 } else {
                   return null;
                 }

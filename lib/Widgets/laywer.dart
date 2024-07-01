@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
 class LawyerWidget extends StatefulWidget {
-  const LawyerWidget({super.key, required this.dialogWidth});
+  const LawyerWidget(
+      {super.key,
+      required this.dialogWidth,
+      required this.limitVal,
+      required this.lawtext});
+  final TextEditingController lawtext;
   final double dialogWidth;
+  final int limitVal;
   static final GlobalKey<FormState> formKey5 = GlobalKey<FormState>();
 
   @override
@@ -10,7 +16,6 @@ class LawyerWidget extends StatefulWidget {
 }
 
 class _LawyerWidgetState extends State<LawyerWidget> {
-  TextEditingController lawtext = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -19,7 +24,7 @@ class _LawyerWidgetState extends State<LawyerWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Lawyer / Court (Minimum fee: 77))',
+            'Lawyer / Court (Minimum fee: ${widget.limitVal}))',
             style: TextStyle(fontSize: 16),
           ),
           Container(
@@ -30,7 +35,7 @@ class _LawyerWidgetState extends State<LawyerWidget> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                controller: lawtext,
+                controller: widget.lawtext,
                 decoration: InputDecoration(
                     errorStyle: TextStyle(
                         height: 0), // Reduce the error text height to 0
@@ -44,8 +49,8 @@ class _LawyerWidgetState extends State<LawyerWidget> {
                   } else if (value == null ||
                       double.tryParse(value.trim()) == null) {
                     return 'Please enter a valid value';
-                  } else if (double.parse(value) < 60.0) {
-                    return 'Please enter a value greater than 60';
+                  } else if (double.parse(value) < widget.limitVal) {
+                    return 'Please enter a value greater than ${widget.limitVal}';
                   } else {
                     return null;
                   }

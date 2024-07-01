@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 
 class CongressWidget extends StatefulWidget {
   static final GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
+  final TextEditingController context;
+  final int limitVal;
   final double dialogWidth;
-  const CongressWidget({super.key, required this.dialogWidth});
+  const CongressWidget(
+      {super.key,
+      required this.dialogWidth,
+      required this.limitVal,
+      required this.context});
 
   @override
   State<CongressWidget> createState() => _CommerceWidgetState();
 }
 
 class _CommerceWidgetState extends State<CongressWidget> {
-  TextEditingController comtext = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -19,7 +24,7 @@ class _CommerceWidgetState extends State<CongressWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Congress/Simultaneous (Minimum fengress)',
+            'Congress/Simultaneous (Minimum fee : ${widget.limitVal}))',
             style: TextStyle(fontSize: 16),
           ),
           Container(
@@ -30,7 +35,7 @@ class _CommerceWidgetState extends State<CongressWidget> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                controller: comtext,
+                controller: widget.context,
                 decoration: InputDecoration(
                     errorStyle: TextStyle(
                         height: 0), // Reduce the error text height to 0
@@ -44,8 +49,8 @@ class _CommerceWidgetState extends State<CongressWidget> {
                   } else if (value == null ||
                       double.tryParse(value.trim()) == null) {
                     return 'Please enter a valid value';
-                  } else if (double.parse(value) < 60.0) {
-                    return 'Please enter a value greater than 60';
+                  } else if (double.parse(value) < widget.limitVal) {
+                    return 'Please enter a value greater than ${widget.limitVal}';
                   } else {
                     return null;
                   }
