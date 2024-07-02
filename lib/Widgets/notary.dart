@@ -35,6 +35,7 @@ class _NotaryWidgetState extends State<NotaryWidget> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                keyboardType: TextInputType.phone,
                 controller: widget.nottext,
                 decoration: InputDecoration(
                     errorStyle: TextStyle(

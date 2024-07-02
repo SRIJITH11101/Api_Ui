@@ -35,6 +35,7 @@ class _DoctorWidgetState extends State<DoctorWidget> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                keyboardType: TextInputType.phone,
                 controller: widget.doctext,
                 decoration: InputDecoration(
                     errorStyle: TextStyle(

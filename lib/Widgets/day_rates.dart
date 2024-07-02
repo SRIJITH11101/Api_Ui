@@ -40,6 +40,7 @@ class _DayRatesWidgetState extends State<DayRatesWidget> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    keyboardType: TextInputType.phone,
                     controller: widget.rate1,
                     decoration: InputDecoration(
                         errorStyle: TextStyle(
@@ -84,6 +85,7 @@ class _DayRatesWidgetState extends State<DayRatesWidget> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    keyboardType: TextInputType.phone,
                     controller: widget.rate2,
                     decoration: InputDecoration(
                         errorStyle: TextStyle(

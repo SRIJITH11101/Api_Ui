@@ -8,7 +8,8 @@ class ExpList {
     var uri = 'https://api.babelonia.nl/site/category/getexperiencelist';
     var url = Uri.parse(uri);
     try {
-      http.Response response = await http.get(url);
+      http.Response response =
+          await http.get(url, headers: {"Accept-Language": "en"});
       if (response.statusCode == 200) {
         var expData = jsonDecode(response.body);
         List<dynamic> expDetails = expData['data'];

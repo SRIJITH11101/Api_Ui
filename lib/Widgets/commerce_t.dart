@@ -28,29 +28,40 @@ class _CommerceWidgetState extends State<CommerceWidget> {
           ),
           Container(
             width: widget.dialogWidth * 0.7,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-            child: TextFormField(
-              controller: widget.comtext,
-              decoration: InputDecoration(
-                  prefixIcon: null, hintText: "Enter the value"),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some value';
-                } else if (value == null ||
-                    double.tryParse(value.trim()) == null) {
-                  return 'Please enter a valid value';
-                } else if (double.parse(value) < widget.limitVal) {
-                  return 'Please enter a value greater than  ${widget.limitVal}';
-                } else {
-                  return null;
-                }
-              },
-              onChanged: (value) {
-                if (CommerceWidget.formKey1.currentState != null) {
-                  CommerceWidget.formKey1.currentState!.validate();
-                  return null;
-                }
-              },
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(color: Colors.black, width: 2)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                keyboardType: TextInputType.phone,
+                controller: widget.comtext,
+                decoration: InputDecoration(
+                    errorStyle: TextStyle(
+                        height: 0), // Reduce the error text height to 0
+                    //helperText: ' ',
+                    border: InputBorder.none,
+                    prefixIcon: null,
+                    hintText: "Enter the value"),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some value';
+                  } else if (value == null ||
+                      double.tryParse(value.trim()) == null) {
+                    return 'Please enter a valid value';
+                  } else if (double.parse(value) < widget.limitVal) {
+                    return 'Please enter a value greater than  ${widget.limitVal}';
+                  } else {
+                    return null;
+                  }
+                },
+                onChanged: (value) {
+                  if (CommerceWidget.formKey1.currentState != null) {
+                    CommerceWidget.formKey1.currentState!.validate();
+                    return null;
+                  }
+                },
+              ),
             ),
           ),
         ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_03/Models/input_details.dart';
 import 'package:task_03/Networking/lang_pair.dart';
+import 'package:task_03/Screens/display_screen.dart';
 import 'package:task_03/Widgets/add_dialog.dart';
 import 'package:task_03/submission.dart';
 
@@ -108,8 +109,8 @@ class _FetchScreenState extends State<FetchScreen> {
                             langNamesList[index],
                             style: TextStyle(fontSize: 18),
                           ),
-                          onPressed: () {
-                            InputDetails(
+                          onPressed: () async {
+                            InputDetails ip = InputDetails(
                               language: langNamesList[index],
                               exp: expList[index],
                               commerce: comtextList[index],
@@ -121,7 +122,43 @@ class _FetchScreenState extends State<FetchScreen> {
                               notary: nottextList[index],
                               private: privtextList[index],
                             );
-                            print(privtextList[index]);
+                            bool savePressed =
+                                await Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return DisplayScreen(
+                                  ip: ip,
+                                  index: index,
+                                );
+                              },
+                            ));
+                            if (savePressed) {
+                              DisplayScreen ds = DisplayScreen(
+                                ip: ip,
+                                index: index,
+                              );
+                              setState(() {
+                                comtextList[index] = DisplayScreen.comtext.text;
+                                congtextList[index] =
+                                    DisplayScreen.congtext.text;
+                                hdaytextList[index] =
+                                    DisplayScreen.hdaytext.text;
+                                wdaytextList[index] =
+                                    DisplayScreen.wdaytext.text;
+                                doctextList[index] = DisplayScreen.doctext.text;
+                                lawtextList[index] = DisplayScreen.lawtext.text;
+                                nottextList[index] = DisplayScreen.nottext.text;
+                                privtextList[index] =
+                                    DisplayScreen.privtext.text;
+                              });
+                              print(DisplayScreen.comtext.text);
+                            } else {
+                              DisplayScreen ds = DisplayScreen(
+                                ip: ip,
+                                index: index,
+                              );
+                              //print(DisplayScreen.comtext.text);
+                              //print(comtextList[index]);
+                            }
                           },
                         ),
                       );

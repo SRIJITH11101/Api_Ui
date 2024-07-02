@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_03/Networking/lang_pair.dart';
 import 'package:task_03/Networking/sub_category.dart';
+import 'package:task_03/Widgets/display_dropdown_field.dart';
+import 'package:task_03/Widgets/display_inp_field.dart';
 import 'package:task_03/Widgets/lang_dropdown.dart';
 import 'package:task_03/Widgets/commerce_t.dart';
 import 'package:task_03/Widgets/congress_s.dart';
@@ -25,6 +27,7 @@ class AddDialogWidget extends StatefulWidget {
     String,
     String,
   ) onSubmittingName;
+  static List<List<int>> totalCommisionLimit = [];
   final BuildContext context;
   const AddDialogWidget({
     super.key,
@@ -67,6 +70,9 @@ class _AddDialogWidgetState extends State<AddDialogWidget> {
         txtformKey6.currentState!.validate() &&
         txtformKey7.currentState!.validate()) {
       print('#######$langPairName');
+
+      AddDialogWidget.totalCommisionLimit.add(commisionLimit);
+      print(AddDialogWidget.totalCommisionLimit);
       Navigator.pop(context);
       widget.onSubmittingName(
           langPairName,
@@ -129,7 +135,7 @@ class _AddDialogWidgetState extends State<AddDialogWidget> {
                       ),
                       SizedBox(height: 10),
                       SizedBox(
-                          width: dialogWidth * 0.7,
+                          width: dialogWidth * 0.85,
                           child: ExpDropDown(
                             onExpChange: (p0) {
                               exp = p0;
@@ -192,13 +198,26 @@ class _AddDialogWidgetState extends State<AddDialogWidget> {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     ElevatedButton(
+                                        style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.redAccent)),
                                         onPressed: () => Navigator.pop(context),
                                         child: Container(
                                           height: 20,
                                           width: 40,
-                                          child: Text('Back'),
+                                          child: Text(
+                                            'Back',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16),
+                                          ),
                                         )),
                                     ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.greenAccent)),
                                       onPressed: () {
                                         submitDropdown(context);
                                         //Navigator.pop(context);
@@ -206,14 +225,19 @@ class _AddDialogWidgetState extends State<AddDialogWidget> {
                                       child: Container(
                                         height: 20,
                                         width: 40,
-                                        child: Text('Add'),
+                                        child: Text(
+                                          'Add',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16),
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
                                 SizedBox(
                                   height: 300,
-                                )
+                                ),
                               ],
                             ),
                     ],

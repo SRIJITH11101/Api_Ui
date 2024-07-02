@@ -13,7 +13,8 @@ class LangPair {
         'https://api.babelonia.nl/site/category/getmaincatlist?type=tasker';
     var url = Uri.parse(uri);
     try {
-      http.Response response = await http.get(url);
+      http.Response response =
+          await http.get(url, headers: {"Accept-Language": "en"});
       if (response.statusCode == 200) {
         var langData = jsonDecode(response.body);
         List<dynamic> langDetails = langData['data'];
@@ -35,7 +36,8 @@ class LangPair {
         'https://api.babelonia.nl/site/category/getmaincatlist?type=tasker';
     var url = Uri.parse(uri);
     try {
-      http.Response response = await http.get(url);
+      http.Response response =
+          await http.get(url, headers: {"Accept-Language": "en"});
       if (response.statusCode == 200) {
         var langData = jsonDecode(response.body);
         List<dynamic> langDetails = langData['data'];

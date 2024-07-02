@@ -35,6 +35,7 @@ class _LawyerWidgetState extends State<LawyerWidget> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                keyboardType: TextInputType.phone,
                 controller: widget.lawtext,
                 decoration: InputDecoration(
                     errorStyle: TextStyle(
