@@ -21,6 +21,7 @@ class _CommerceWidgetState extends State<CommerceWidget> {
     return Form(
       key: CommerceWidget.formKey1,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Commerce/Trade (Minimum fee : ${widget.limitVal})',

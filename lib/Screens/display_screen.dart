@@ -254,7 +254,18 @@ class DisplayScreen extends StatelessWidget {
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.greenAccent)),
-                    onPressed: () => Navigator.pop(context, true),
+                    onPressed: () {
+                      if (txtformKey1.currentState!.validate() &&
+                          txtformKey2.currentState!.validate() &&
+                          txtformKey3.currentState!.validate() &&
+                          txtformKey4.currentState!.validate() &&
+                          txtformKey5.currentState!.validate() &&
+                          txtformKey6.currentState!.validate() &&
+                          txtformKey7.currentState!.validate() &&
+                          txtformKey8.currentState!.validate()) {
+                        Navigator.pop(context, true);
+                      }
+                    },
                     child: Container(
                       height: 20,
                       width: 40,

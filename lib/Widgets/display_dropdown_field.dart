@@ -10,7 +10,7 @@ class DisplayDropDownField extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController dispCtrl = TextEditingController(text: dispText);
     return Container(
-      height: 45,
+      height: 50,
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),

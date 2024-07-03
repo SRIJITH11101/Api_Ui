@@ -12,7 +12,6 @@ import 'package:task_03/Widgets/exp_dropdown.dart';
 import 'package:task_03/Widgets/laywer.dart';
 import 'package:task_03/Widgets/notary.dart';
 import 'package:task_03/Widgets/private.dart';
-import 'package:task_03/submission.dart';
 
 class AddDialogWidget extends StatefulWidget {
   final Function(
@@ -40,7 +39,6 @@ class AddDialogWidget extends StatefulWidget {
 }
 
 class _AddDialogWidgetState extends State<AddDialogWidget> {
-  final Submission sub = Submission();
   final GlobalKey<FormState> txtformKey1 = CommerceWidget.formKey1;
   final GlobalKey<FormState> txtformKey2 = CongressWidget.formKey2;
   final GlobalKey<FormState> txtformKey3 = DayRatesWidget.formKey3;

@@ -33,7 +33,7 @@ class _DisplayInputFieldState extends State<DisplayInputField> {
     return Form(
       key: widget.txtkey,
       child: Container(
-        height: 45,
+        height: 70,
         width: widget.width,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -46,7 +46,9 @@ class _DisplayInputFieldState extends State<DisplayInputField> {
             keyboardType: TextInputType.phone,
             controller: widget.ctrl,
             decoration: InputDecoration(
-                fillColor: Colors.white, border: InputBorder.none),
+                errorStyle: TextStyle(height: 0),
+                fillColor: Colors.white,
+                border: InputBorder.none),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some value';

@@ -3,7 +3,6 @@ import 'package:task_03/Models/input_details.dart';
 import 'package:task_03/Networking/lang_pair.dart';
 import 'package:task_03/Screens/display_screen.dart';
 import 'package:task_03/Widgets/add_dialog.dart';
-import 'package:task_03/submission.dart';
 
 class FetchScreen extends StatefulWidget {
   const FetchScreen({super.key});
